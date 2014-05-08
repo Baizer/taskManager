@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task manager</title>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/foundation/5.2.2/css/normalize.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/foundation/5.2.2/css/foundation.css">
+  <link rel="stylesheet" href="css/foundation-datepicker.css">
+  <link rel="stylesheet" href="css/app.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/foundation/5.2.2/js/vendor/modernizr.js"></script>
+</head>
+
+<body>
+  <div id="wrap">
+    <header role="tabs">
+      <div class="contain-to-grid sticky">
+        <nav class="top-bar textCenter" id="headerRegion" data-options="sticky_on: large">
+        </nav>
+      </div>
+    </header>
+    <main id="content" role="main">
+      <div id="inputRegion" class="row">
+      </div>
+      <div id="listRegion" class="row">
+      </div>
+    </main>
+  </div>
+  <footer id="footerRegion" role="contentInfo">
+  </footer>
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/backbone-localstorage.js/1.1.7/backbone.localStorage-min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.marionette/1.8.0/backbone.marionette.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/foundation/5.2.2/js/foundation.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/foundation/5.2.2/js/foundation/foundation.topbar.min.js"></script>
+  <script src="js/foundation-datetimepicker.js"></script>
+  <script src="js/app.js"></script>
+
+  <script type="text/html" id="taskTemplate">
+<div class="textWrapper">
+  <input class="doneBtn"  type="checkbox" <% if (done){ %> checked = "checked" <% }; %>>
+  <span class="taskText"> <%= text %> </span>
+  <time class="dateTask"><%= time %></time >
+  <a class="removeBtn"> &times; </a>
+</div >
+<div class="inputWrapper">
+  <a class="tiny button success saveBtn"> ok </a>
+  <input class="taskInputText" type="text"  value="<%=text%>">
+  <input class="taskInputDate datePicker" type="text" data-date-format="dd/mm/yy hh:ii" value="<%= time %>">
+</div>
+  </script>
+
+  <script type="text/html" id="inputTemplate">
+<div class="row">
+  <div id="info" class="large-8 large-centered columns callout panel">
+    <p>
+      <span class="label">Enter</span> - добавить задачу
+    </p>
+    <p>
+      <span class="label">dblclick</span> на задаче - изменить задачу
+    </p>
+  </div>
+</div>
+<div class="large-8 large-centered columns">
+  <div class = "small-8 columns" id="taskTextColumn">
+    <label>Введите задачу<input id="taskText" type="text" placeholder="Задача" autofocus>
+    </label>
+    <small class="error">Поле должно быть заполнено</small >
+  </div>
+  <div class="small-4 columns">
+    <label>Введите время<input id="taskDate" class="datePicker" data-date-format="dd/mm/yy hh:ii" type="text" placeholder="Дата">
+    </label>
+  </div>
+</div>
+  </script>
+
+  <script type="text/html" id="headerTemplate">
+<li>
+  <a href="#" class="large button secondary navigateBtn">Все</a>
+</li>
+<li>
+  <a href="doneTasks" class="large button secondary navigateBtn">Завершенные</a>
+</li>
+<li>
+  <a href="unDoneTasks" class="large button secondary navigateBtn">Незавершенные</a>
+</li>
+</script>
+
+<script type="text/html" id="footerTemplate">
+<a class="button alert clearBtn">Кнопка удаления всех задач</a>
+</script>
+
+</body>
+
+</html>
