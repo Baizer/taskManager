@@ -103,8 +103,10 @@ $(function () {
         this.ui.info.show();
         localStorage.setItem('info',true);
     }
-
-      this.ui.date.fdatetimepicker();
+      var inp = this.ui.input;
+      this.ui.date.fdatetimepicker().on('hide', function(ev){
+        inp.focus();
+      });;
     },
 
     onBeforeClose: function () {
@@ -160,7 +162,11 @@ $(function () {
       'keydown .taskText': 'saveOrExit'
     },
 
-    removeBtn: function () {
+    removeBtn: function (e) {
+      e.preventDefault();
+      if (this.ui.datePicker.data('datetimepicker')) {
+        this.ui.datePicker.data('datetimepicker').picker[0].remove();
+      }
       this.model.destroy();
     },
 
@@ -175,19 +181,13 @@ $(function () {
       this.ui.input.focus();
     },
 
-    onBeforeClose: function (){
-      if (this.ui.datePicker.data('datetimepicker')) {
-        this.ui.datePicker.data('datetimepicker').picker[0].remove();
-      }
-    },
-
     onShow: function () {
       this.listenTo(this.model, 'change', this.render);
       if (this.model.get('done')) {
         this.$el.addClass('done');
       }
     },
-    
+
     onBeforeClose: function () {
       this.model.stopListening();
     },
